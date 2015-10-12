@@ -22,7 +22,7 @@ namespace EntityFrameworkBased.BaseDAL
         /// </summary>
         /// <param name="t">数据实体</param>
         /// <returns>受影响行数</returns>
-        public int Add(T t)
+        public int Insert(T t)
         {
             if (t == null)
                 return -1;
@@ -31,6 +31,27 @@ namespace EntityFrameworkBased.BaseDAL
                 var dbset = context.Set(t.GetType());
                 dbset.Add(t);
                 return context.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// 新增记录
+        /// </summary>
+        /// <param name="t">数据实体</param>
+        /// <returns>执行添加操作后的数据实体</returns>
+        public T Add(T t)
+        {
+            if (t == null)
+                return null;
+            using (var context = new DbContextFactory().GetDbContext(DbConnect))
+            {
+                var dbset = context.Set(t.GetType());
+                dbset.Add(t);
+                int count = context.SaveChanges();
+                if (count > 0)
+                    return t;
+                else
+                    return null;
             }
         }
 
