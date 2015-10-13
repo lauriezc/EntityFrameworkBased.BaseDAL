@@ -27,7 +27,7 @@ namespace EntityFrameworkBased.BaseDAL
             if (filters.Count == 0)
                 return null;
 
-            ParameterExpression param = Expression.Parameter(typeof(T), "t");
+            ParameterExpression param = Expression.Parameter(typeof(T), "entity");
             Expression exp = null;
 
             if (filters.Count == 1)
