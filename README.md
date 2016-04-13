@@ -1,2 +1,2 @@
 # EntityFrameworkBased.BaseDAL
-Just a test!
+简单的EF泛型封装
